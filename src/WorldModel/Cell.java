@@ -5,12 +5,9 @@ public class Cell {
 	private static final int DIE_STEPS = 3;
 	private int givenSteps;
 	private int noMoveSteps;
-	private boolean moved;
-	public boolean isMoved() {
-		return moved;
-	}
-	public void setMoved(boolean moved) {
-		this.moved = moved;
+	private boolean tired;
+	public boolean isTired() {
+		return tired;
 	}
 	public boolean isPregnant(){
 		if (givenSteps > REP_STEPS){
@@ -25,17 +22,18 @@ public class Cell {
 	
 	public void resetCountdownToDeath(){
 		this.noMoveSteps = 0;
+		this.givenSteps++;
+		this.tired = true;
 	}
 	
 	public void increaseCountdownToDeath(){
 		this.noMoveSteps++;
-		this.moved = true;
 	}
 	
 	public void print(){
-		System.out.printf(" %d - %d ",this.givenSteps, this.noMoveSteps);
+		System.out.printf(" %d-%d ",this.givenSteps, this.noMoveSteps);
 	}
-	public void unmove() {
-		this.moved = false;
+	public void rest() {
+		this.tired = false;
 	}
 }

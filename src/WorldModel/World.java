@@ -1,9 +1,11 @@
 package WorldModel;
 
+import java.util.Random;
+
 public class World {
-	private static final int ROWS = 10;
-	private static final int COLS = 10;
-	private static final int ICELLS = 10;
+	private static final int ROWS = 5;
+	private static final int COLS = 5;
+	private static final int ICELLS = 5;
 	
 	private Surface surface;
 	private int steps = 0;
@@ -14,13 +16,13 @@ public class World {
 	}
 	
 	public World(){
+		System.out.println("creating world");
 		surface = new Surface(ROWS, COLS);
+		Random randomGenerator = new Random();
 		for (int i = 0; i < ICELLS; i++){
-			int randx = 5;
-			int randy = 5;
-			if (surface.getCell(randx,randy) == null)
-				surface.create(randx, randy);
-			else i--;
+			int randx = randomGenerator.nextInt(ROWS);
+			int randy = randomGenerator.nextInt(COLS);
+			if (!surface.create(randx, randy)) i--;
 		}
 	}
 	
@@ -34,15 +36,21 @@ public class World {
 		//Reset the movements
 		for (int x = 0; x < surface.getRows(); x++)
 			for (int y = 0; y < surface.getCols(); y++){
-				if (surface.getCell(x, y) != null) surface.getCell(x, y).unmove();
+				if (surface.getCell(x, y) != null) surface.getCell(x, y).rest();
 		}
 		
 		//Move cells
 		for (int x = 0; x < surface.getRows(); x++)
 			for (int y = 0; y < surface.getCols(); y++){
-				if (surface.getCell(x, y) != null && !surface.getCell(x, y).isMoved()){
+				if (surface.getCell(x, y) != null && !surface.getCell(x, y).isTired()){
 					if (surface.moveCell(x,y)){
-						if (surface.getCell(x, y).isPregnant()) surface.create(x,y);
+						if (surface.getCell(x, y).isPregnant()){
+							surface.destroy(x,y);
+							surface.create(x,y);
+						}
+						else{
+							surface.destroy(x, y);
+						}
 					} else if (surface.getCell(x, y).isPregnant()) surface.destroy(x,y);
 				}
 			}
@@ -58,10 +66,11 @@ public class World {
 	}
 	
 	public void xRisk(){
-		for (int x = 0; x < surface.getRows(); x++)
+		for (int x = 0; x < surface.getRows(); x++){
 			for (int y = 0; y < surface.getCols(); y++){
 				if (surface.getCell(x, y) != null) surface.destroy(x,y);
 			}
+		}
 	}
 
 	

@@ -1,0 +1,10 @@
+Commands:
+	STEP: Run a step of the simulation
+	HELP: Show commands
+	CREATE x y: Create a cell in pos x y
+	DESTROY x y: Destroy a cell in pos x y
+	RESET: Reset the simulation
+	METEORFALL: Kill every cell
+	EXIT: Close the app
+	EASTEREGG: ???
+	
