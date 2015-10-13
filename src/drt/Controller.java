@@ -49,7 +49,7 @@ public class Controller {
 						BrowseURL.EasterEgg();
 					}
 					catch(Exception e){
-						System.out.println("Error!");
+						System.out.println(e.getMessage());
 					}
 			}
 			this.world.getSurface().draw();

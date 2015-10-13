@@ -14,7 +14,7 @@ public static void Read(String file) {
 		   }
 		}
 	catch (IOException e){
-		System.out.println("Error!");
+		System.out.println(e.getMessage());
 	}
 }
 }
