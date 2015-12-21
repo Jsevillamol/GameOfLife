@@ -1,7 +1,7 @@
 package Commands;
 
-import WorldModel.World;
 import drt.BrowseURL;
+import drt.Driver;
 /**
  * ???
  * @author Jaime
@@ -10,13 +10,13 @@ import drt.BrowseURL;
 public class EasterEgg extends Cmd {
 
 	@Override
-	public void run(World world) {
+	public void run(Driver world) {
 		BrowseURL.EasterEgg();
 	}
 
 	@Override
 	public Cmd parse(String cmd) {
-		if (cmd.equals("EASTEREGG")) return this;
+		if (cmd.equalsIgnoreCase("EASTEREGG")) return this;
 		else return null;
 	}
 

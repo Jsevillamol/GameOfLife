@@ -1,6 +1,6 @@
 package Commands;
 
-import WorldModel.World;
+import drt.Driver;
 /**
  * Executes one step of the simulation.
  * @author Jaime
@@ -9,13 +9,13 @@ import WorldModel.World;
 public class Step extends Cmd {
 
 	@Override
-	public void run(World world) {
+	public void run(Driver world) {
 		world.step();
 	}
 
 	@Override
 	public Cmd parse(String cmd) {
-		if(cmd.equals("STEP")) return this;
+		if(cmd.equalsIgnoreCase("STEP")) return this;
 		else return null;
 	}
 

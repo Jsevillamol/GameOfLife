@@ -1,7 +1,6 @@
 package drt;
 import java.util.Scanner;
 
-import WorldModel.World;
 /*
  * Se me ha sugerido entregar la practica en espannol.
  * Despues de meditarlo he optado por no hacerlo, atendiendo a las siguientes razones:
@@ -22,8 +21,7 @@ public class Main {
 		System.out.println("Start");
 		Scanner in = new Scanner(System.in);
 		System.out.println("Scanner imported");
-		World world = new World();
-		Controller controller = new Controller(world, in);
+		Driver controller = new Driver(in);
 		controller.startSimulation();
 		System.out.println("Exit");
 	}

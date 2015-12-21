@@ -1,0 +1,9 @@
+complex
+5
+5
+0 0 simple 0 0
+0 1 complex 0
+2 3 complex 0
+4 1 simple 0 0
+4 2 simple 0 0
+4 4 complex 0

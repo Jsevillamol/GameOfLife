@@ -1,16 +1,22 @@
 package WorldModel;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 /**
  * Normal cells, that move randomly and reproduce after certain steps.
  * @author Jaime
  *
  */
-public class SimpleCell extends Cell{
+public class SimpleCell implements Cell{
 	private static final int REP_STEPS = 3;
 	private static final int DIE_STEPS = 3;
 	private int givenSteps;
 	private int noMoveSteps;
+	public SimpleCell(int igiven, int inoMove) {
+		givenSteps=igiven; noMoveSteps = inoMove;
+	}
+	public SimpleCell() {}
 	/**
 	 * Shows if the cell is ready to reproduce, and resets counter to 0
 	 * @return True if ready to reproduce
@@ -72,5 +78,9 @@ public class SimpleCell extends Cell{
 			return new Pair(x,y);
 		}
 		
+	}
+	@Override
+	public void save(PrintWriter file) throws IOException {
+		file.println("simple " + this.givenSteps +" " + this.noMoveSteps);
 	}
 }

@@ -1,6 +1,6 @@
 package Commands;
 
-import WorldModel.World;
+import drt.Driver;
 /**
  * Exits the program
  * @author Jaime
@@ -9,13 +9,13 @@ import WorldModel.World;
 public class Exit extends Cmd {
 
 	@Override
-	public void run(World world) {
+	public void run(Driver world) {
 		world.stop();
 	}
 
 	@Override
 	public Cmd parse(String cmd) {
-		if(cmd.equals("EXIT")) return this;
+		if(cmd.equalsIgnoreCase("EXIT")) return this;
 		else return null;
 	}
 

@@ -1,6 +1,7 @@
 package Commands;
 
-import WorldModel.World;
+import MyExceptions.CmdFormatError;
+import drt.Driver;
 /**
  * Destroys the Cell/Virus in the specified position
  * @author Jaime
@@ -18,24 +19,24 @@ public class Destroy extends Cmd {
 	}
 	
 	@Override
-	public void run(World world) {
-		world.getSurface().destroy(x, y);
+	public void run(Driver world) {
+		world.destroy(x, y);
 	}
 
 	@Override
-	public Cmd parse(String cmd) {
+	public Cmd parse(String cmd) throws NumberFormatException, CmdFormatError {
 		String[] cmd1 = cmd.split(" ");
-		if (cmd1[0].equals("DESTROY")){
-			int x,y;
-			try{
+		try{
+			if (cmd1[0].equalsIgnoreCase("DESTROY")){
+				int x,y;
 				x = Integer.parseInt(cmd1[1]);
 				y = Integer.parseInt(cmd1[2]);
 				return new Destroy(x,y);
 			}
-			catch (Exception e){ return null;}
-			
+			return null;
+		}catch(ArrayIndexOutOfBoundsException e){
+			throw new CmdFormatError();
 		}
-		return null;
 	}
 
 	@Override

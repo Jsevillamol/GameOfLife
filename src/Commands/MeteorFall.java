@@ -1,6 +1,6 @@
 package Commands;
 
-import WorldModel.World;
+import drt.Driver;
 /**
  * Kills every Cell and Virus in the World.
  * @author Jaime
@@ -9,14 +9,14 @@ import WorldModel.World;
 public class MeteorFall extends Cmd {
 
 	@Override
-	public void run(World world) {
+	public void run(Driver world) {
 		world.xRisk();
 
 	}
 
 	@Override
 	public Cmd parse(String cmd) {
-		if(cmd.equals("METEORFALL")) return this;
+		if(cmd.equalsIgnoreCase("METEORFALL")) return this;
 		else return null;
 	}
 

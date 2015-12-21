@@ -1,18 +1,19 @@
 package WorldModel;
 
-import java.util.Random;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import MyExceptions.InitError;
+import MyExceptions.SaveFileFormatError;
 /**
  * Superior layer of the virtual automata.
  */
-public class World {
+public abstract class World {
 	
-	private static final int ROWS = 5;
-	private static final int COLS = 5;
-	private static final int ICELLS = 5;
-	private static final int IVIRUS = 5;
+	protected int rows, cols;
 	
-	private Surface surface;
-	private boolean running = true;
+	protected Surface surface;
 	private int steps = 0;
 	public int getSteps(){return steps;}
 	
@@ -21,24 +22,16 @@ public class World {
 	}
 	
 	public World(){
-		System.out.println("creating world");
-		reset();
+		surface = null;
+		rows = cols = 0;
 	}
 	
-	public void reset(){
-		surface = new Surface(ROWS, COLS);
-		Random randomGenerator = new Random();
-		for (int i = 0; i < ICELLS; i++){
-			int randx = randomGenerator.nextInt(ROWS);
-			int randy = randomGenerator.nextInt(COLS);
-			if (!surface.createCell(randx, randy)) i--;
-		}
-		for (int i = 0; i < IVIRUS; i++){
-			int randx = randomGenerator.nextInt(ROWS);
-			int randy = randomGenerator.nextInt(COLS);
-			if (!surface.createVirus(randx, randy)) i--;
-		}
+	public World(int irows, int icols){
+		rows = irows; cols = icols;
+		surface = new Surface(rows, cols);
 	}
+	
+	public abstract void reset() throws InitError;
 	
 	/**
 	 * Executes a turn of the game
@@ -78,12 +71,43 @@ public class World {
 		}
 	}
 
-	public boolean running() {
-		return running;
-	}
-	public void stop(){
-		running = false;
+	public void save(PrintWriter file) throws IOException{
+		file.println(rows);
+		file.println(cols);
+		for (int x = 0; x < surface.getRows(); x++){
+			for (int y = 0; y < surface.getCols(); y++){
+				if (!surface.isEmpty(x,y)){
+					file.print(x+" "+y+" ");
+					surface.save(file,x,y);
+				}
+			}
+		}
 	}
 
+	public void load(BufferedReader file) throws IOException, SaveFileFormatError {
+		try{
+			rows = Integer.parseInt(file.readLine());
+			cols = Integer.parseInt(file.readLine());
+		}catch(NumberFormatException e){
+			throw new SaveFileFormatError();
+		}
+		surface = new Surface(rows, cols);
+		surface.load(file);
+		
+	}
+
+	public void destroy(int x, int y) {
+		surface.destroy(x, y);
+		
+	}
+	
+	public void createCell(int x, int y){
+		surface.createCell(x, y);
+	}
+	
+	public void createVirus(int x, int y){
+		surface.createVirus(x, y);
+	}
+	
 	
 }

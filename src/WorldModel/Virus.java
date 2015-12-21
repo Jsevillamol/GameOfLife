@@ -1,16 +1,24 @@
 package WorldModel;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 /**
  * Special Cells, that eat Simple Cells.
  * @author Jaime
  *
  */
-public class Virus extends Cell{
+public class Virus implements Cell{
 
 	private static final int DIE_STEPS = 3;
 	private int eatenCells;
 	
+	public Virus(int eaten) {
+		eatenCells = eaten;
+	}
+
+	public Virus() {}
+
 	public boolean isReadyToDie(){
 		return eatenCells >= DIE_STEPS;
 	}
@@ -41,5 +49,10 @@ public class Virus extends Cell{
 		}
 		return new Pair(rx,ry);
 		
+	}
+
+	@Override
+	public void save(PrintWriter file) throws IOException {
+		file.println("complex " + this.eatenCells);
 	}
 }

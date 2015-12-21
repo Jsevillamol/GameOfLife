@@ -1,9 +1,12 @@
 package WorldModel;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * Abstract class of cells in the world
  */
-public abstract class Cell {
+public interface Cell {
 	
 	/**
 	 * Instructs the cell to play its turn
@@ -14,5 +17,6 @@ public abstract class Cell {
 	
 	
 	abstract public void print();
+	public abstract void save(PrintWriter file) throws IOException;
 	
 }

@@ -1,5 +1,11 @@
 package WorldModel;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import MyExceptions.SaveFileFormatError;
+
 /**
  * Matrix of Cells
  */
@@ -115,6 +121,36 @@ public class Surface {
 		surface[rx][ry] = surface[x][y];
 		surface[x][y] = null;
 		
+	}
+	public void save(PrintWriter file, int x, int y) throws IOException {
+		surface[x][y].save(file);
+	}
+	
+	public void load(BufferedReader file) throws IOException, SaveFileFormatError{
+		String[] s;
+		int x,y;
+		while(file.ready()){
+			s = file.readLine().split(" ");
+			x = Integer.parseInt(s[0]);
+			y = Integer.parseInt(s[1]);
+			
+			if (s[2].equalsIgnoreCase("simple")){
+				int given = Integer.parseInt(s[3]);
+				int noMove = Integer.parseInt(s[4]);
+				this.createCell(x,y,given,noMove);
+			}
+			else if (s[2].equalsIgnoreCase("complex")){
+				int eaten = Integer.parseInt(s[3]);
+				this.createVirus(x, y, eaten);
+			}
+			else throw new SaveFileFormatError();
+		}
+	}
+	private void createCell(int x, int y, int given, int noMove) {
+		surface[x][y]= new SimpleCell(given,noMove);
+	}
+	private void createVirus(int x, int y, int eaten) {
+		surface[x][y]= new Virus(eaten);
 	}
 	
 }
