@@ -1,39 +1,18 @@
 package WorldModel;
 
-public class Cell {
-	private static final int REP_STEPS = 3;
-	private static final int DIE_STEPS = 3;
-	private int givenSteps;
-	private int noMoveSteps;
-	private boolean tired;
-	public boolean isTired() {
-		return tired;
-	}
-	public boolean isPregnant(){
-		if (givenSteps > REP_STEPS){
-			givenSteps = 0;
-			return true;
-		}
-		else return false;
-	}
-	public boolean isReadyToDie(){
-		return noMoveSteps >= DIE_STEPS;
-	}
+/**
+ * Abstract class of cells in the world
+ */
+public abstract class Cell {
 	
-	public void resetCountdownToDeath(){
-		this.noMoveSteps = 0;
-		this.givenSteps++;
-		this.tired = true;
-	}
+	/**
+	 * Instructs the cell to play its turn
+	 * @param surface
+	 */
+	abstract public Pair move(int x, int y, Surface surface);
+	abstract public boolean isReadyToDie();
 	
-	public void increaseCountdownToDeath(){
-		this.noMoveSteps++;
-	}
 	
-	public void print(){
-		System.out.printf(" %d-%d ",this.givenSteps, this.noMoveSteps);
-	}
-	public void rest() {
-		this.tired = false;
-	}
+	abstract public void print();
+	
 }

@@ -3,7 +3,11 @@ package drt;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+/**
+ * Shows files in the console (deprecated)
+ * @author Jaime
+ *
+ */
 public class ReadFile {
 
 public static void Read(String file) {
