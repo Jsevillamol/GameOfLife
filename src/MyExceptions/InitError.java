@@ -6,5 +6,11 @@ package MyExceptions;
  *
  */
 public class InitError extends Exception {
-
+	public InitError(){
+		super();
+	}
+	
+	public InitError(String msg){
+		super(msg);
+	}
 }

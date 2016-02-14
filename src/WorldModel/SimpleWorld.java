@@ -1,5 +1,4 @@
 package WorldModel;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 
@@ -28,10 +27,10 @@ public class SimpleWorld extends World {
 		}
 
 	}
+	
 	@Override
-	public void save(PrintWriter file) throws IOException{
+	protected void save_world_type(PrintWriter file) {
 		file.println("simple");
-		super.save(file);
 	}
 
 }

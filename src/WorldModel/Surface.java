@@ -72,9 +72,9 @@ public class Surface {
 	 * @param y column
 	 * @return If cell already occupied, return False.
 	 */
-	public boolean createCell(int x, int y){
+	public boolean createCell(int x, int y) throws ArrayIndexOutOfBoundsException{
 		
-		if (0<=x && x<this.rows && 0<=y && y<this.cols && surface[x][y] == null){
+		if (surface[x][y] == null){
 			surface[x][y] = new SimpleCell();
 			return true;
 		} else return false;
@@ -85,9 +85,9 @@ public class Surface {
 	 * @param y column
 	 * @return If cell already occupied, return False.
 	 */
-	public boolean createVirus(int x, int y){
+	public boolean createVirus(int x, int y) throws ArrayIndexOutOfBoundsException{
 		
-		if (0<=x && x<this.rows && 0<=y && y<this.cols && surface[x][y] == null){
+		if (surface[x][y] == null){
 			surface[x][y] = new Virus();
 			return true;
 		} else return false;
@@ -98,9 +98,10 @@ public class Surface {
 	 * @param y column
 	 * @return If cell empty, return False.
 	 */
-	public boolean destroy(int x, int y){
+	public boolean destroy(int x, int y) throws ArrayIndexOutOfBoundsException{
 		
-		if (0<=x && x<this.rows && 0<=y && y<this.cols && surface[x][y] != null){
+		//if (0<=x && x<this.rows && 0<=y && y<this.cols && surface[x][y] != null){
+		if (surface[x][y] != null){
 			surface[x][y] = null;
 			return true;
 		} else return false;

@@ -1,4 +1,4 @@
-package drt;
+package Main;
 import MyExceptions.CmdFormatError;
 import MyExceptions.CmdNotFound;
 import MyExceptions.InitError;
@@ -58,15 +58,17 @@ public class Driver {
 				System.out.println(e.getMessage());
 				//e.printStackTrace();
 			} catch (CmdFormatError e) {
-				System.out.println("The command arguments were incorrect.");
+				System.out.println(e.getMessage());
 				//e.printStackTrace();
 			} catch (SaveFileFormatError e) {
 				System.out.println("Incorrect File Format");
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch(NullPointerException e){
 				System.out.println("No world loaded. Start a new simulation or load one.");
 			} catch (InitError e) {
 				System.out.println("The number of cells surpases the surface size!");
+			} catch (NumberFormatException e){
+				System.out.println("Incorrect format: number expected");
 			}
 			this.getIn().reset();
 		}
@@ -89,14 +91,16 @@ public class Driver {
 		FileReader reader = new FileReader(fileName);
 		BufferedReader file = new BufferedReader(reader);
 		String s = file.readLine();
-		if(s.equalsIgnoreCase("SIMPLE")) world = new SimpleWorld();
-		else if(s.equalsIgnoreCase("COMPLEX")) world = new ComplexWorld();
+		World new_world;
+		if(s.equalsIgnoreCase("SIMPLE")) new_world = new SimpleWorld();
+		else if(s.equalsIgnoreCase("COMPLEX")) new_world = new ComplexWorld();
 		else{
 			file.close();
 			throw new SaveFileFormatError();
 		}
-		world.load(file);
+		new_world.load(file);
 		file.close();
+		world = new_world;
 	}
 	public void save(String fileName) throws IOException {
 		PrintWriter file = new PrintWriter(new FileWriter(fileName));
@@ -109,18 +113,18 @@ public class Driver {
 	public void xRisk() {
 		world.xRisk();
 	}
-	public void destroy(int x, int y) {
+	public void destroy(int x, int y) throws ArrayIndexOutOfBoundsException {
 		world.destroy(x,y);
 		
 	}
-	public void createVirus(int x, int y) {
+	public void createVirus(int x, int y) throws ArrayIndexOutOfBoundsException  {
 		world.createVirus(x,y);
 		
 	}
 	public boolean isComplex() {
 		return world instanceof ComplexWorld;
 	}
-	public void createCell(int x, int y) {
+	public void createCell(int x, int y) throws ArrayIndexOutOfBoundsException {
 		world.createCell(x,y);
 	}
 }

@@ -3,7 +3,7 @@ package Commands;
 import MyExceptions.CmdFormatError;
 import MyExceptions.InitError;
 import WorldModel.ComplexWorld;
-import drt.Driver;
+import Main.Driver;
 /**
  * Creates a new simulation with both Cells and Virus.
  * @author Jaime
@@ -41,7 +41,7 @@ public class PlayComplex extends Cmd {
 
 	@Override
 	public String help() {
-		return "PLAYCOMPLEX X Y C: Creates a new Complex World with X rows, Y cols, C cells and V virus";
+		return "PLAYCOMPLEX X Y C V: Creates a new Complex World with X rows, Y cols, C cells and V virus";
 	}
 
 }

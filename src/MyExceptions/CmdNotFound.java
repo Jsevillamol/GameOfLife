@@ -5,6 +5,10 @@ package MyExceptions;
  *
  */
 public class CmdNotFound extends Exception {
+	public CmdNotFound(){
+		super();
+	}
+	
 	public CmdNotFound(String name){
 		super(name);
 	}

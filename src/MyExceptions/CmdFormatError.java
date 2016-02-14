@@ -6,5 +6,10 @@ package MyExceptions;
  *
  */
 public class CmdFormatError extends Exception {
-
+	public CmdFormatError(){
+		super("The command arguments were incorrect.");
+	}
+	public CmdFormatError(String message){
+		super(message);
+	}
 }

@@ -1,7 +1,7 @@
 package Commands;
 
 import MyExceptions.CmdFormatError;
-import drt.Driver;
+import Main.Driver;
 /**
  * Creates a SimpleCell in the specified position
  * @author Jaime
@@ -19,15 +19,20 @@ public class Create extends Cmd{
 	
 	@Override
 	public void run(Driver world) throws CmdFormatError {
-		if (world.isComplex()){
-			String c;
-			System.out.println("Create simple cell(s) or virus(v)?");
-			c = world.getIn().nextLine().toUpperCase();
-			if (c.equalsIgnoreCase("v")) world.createVirus(x,y);
-			else if (c.equalsIgnoreCase("s")) world.createCell(x, y);
-			else throw new CmdFormatError();
+		try{
+			if (world.isComplex()){
+				String c;
+				System.out.println("Create simple cell(s) or virus(v)?");
+				c = world.getIn().nextLine().toUpperCase();
+				if (c.equalsIgnoreCase("v")) world.createVirus(x,y);
+				else if (c.equalsIgnoreCase("s")) world.createCell(x, y);
+				else throw new CmdFormatError("You must write \"V\" or \"S\"");
+			}
+		
+			world.createCell(x, y);
+		}catch(ArrayIndexOutOfBoundsException e){
+			throw new CmdFormatError("Cell OutOfBounds");
 		}
-		world.createCell(x, y);
 	}
 
 	@Override

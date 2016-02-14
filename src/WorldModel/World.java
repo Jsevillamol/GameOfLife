@@ -72,6 +72,7 @@ public abstract class World {
 	}
 
 	public void save(PrintWriter file) throws IOException{
+		save_world_type(file);
 		file.println(rows);
 		file.println(cols);
 		for (int x = 0; x < surface.getRows(); x++){
@@ -83,6 +84,8 @@ public abstract class World {
 			}
 		}
 	}
+
+	protected abstract void save_world_type(PrintWriter file);
 
 	public void load(BufferedReader file) throws IOException, SaveFileFormatError {
 		try{
@@ -96,16 +99,16 @@ public abstract class World {
 		
 	}
 
-	public void destroy(int x, int y) {
+	public void destroy(int x, int y) throws ArrayIndexOutOfBoundsException {
 		surface.destroy(x, y);
 		
 	}
 	
-	public void createCell(int x, int y){
+	public void createCell(int x, int y) throws ArrayIndexOutOfBoundsException{
 		surface.createCell(x, y);
 	}
 	
-	public void createVirus(int x, int y){
+	public void createVirus(int x, int y) throws ArrayIndexOutOfBoundsException{
 		surface.createVirus(x, y);
 	}
 	

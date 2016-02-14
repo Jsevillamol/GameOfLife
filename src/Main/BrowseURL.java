@@ -1,4 +1,4 @@
-package drt;
+package Main;
 
 import java.awt.Desktop;
 import java.net.URI;

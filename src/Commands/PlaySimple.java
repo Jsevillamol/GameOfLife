@@ -3,7 +3,7 @@ package Commands;
 import MyExceptions.CmdFormatError;
 import MyExceptions.InitError;
 import WorldModel.SimpleWorld;
-import drt.Driver;
+import Main.Driver;
 /**
  * Creates a new simulation with only SimpleCells.
  * @author Jaime

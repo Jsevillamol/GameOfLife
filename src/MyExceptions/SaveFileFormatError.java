@@ -5,5 +5,10 @@ package MyExceptions;
  *
  */
 public class SaveFileFormatError extends Exception {
-
+	public SaveFileFormatError(){
+		super();
+	}
+	public SaveFileFormatError(String msg){
+		super(msg);
+	}
 }
